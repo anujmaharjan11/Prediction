@@ -2,7 +2,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.prediction, name='prediction'),
+    path('', views.predict, name='predict'),
     path('result/', views.result, name='result')
 
 ]

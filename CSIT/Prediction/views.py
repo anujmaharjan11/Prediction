@@ -4,7 +4,7 @@ import joblib
 from django.shortcuts import render, redirect
 
 
-def prediction(request):
+def predict(request):
     if request.method == "POST":
         Id = request.POST['s_id']
         assignment = request.POST['assignment']
@@ -39,9 +39,9 @@ def prediction(request):
             #                            third=third, final=final)
 
             context = {'final': final}
-            return render(request, 'Prediction/prediction.html', context)
+            return render(request, 'Prediction/predict.html', context)
 
-    return render(request, 'Prediction/prediction.html')
+    return render(request, 'Prediction/predict.html')
 
 
 def result(request):
