@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--{% load static %}-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predictor</title>
+</head>
+<body>
+    <h1>Do your prediction</h1><hr>
+    <form action="{% url 'result' %}" method="POST">
+        {% csrf_token %}
+
+        Your Id: <input type="number" name="s_id" placeholder="id" required><br><br>
+        Assignment: <input type="number" name="assignment" placeholder="Out of 10" required><br><br>
+        Attendance: <input type="number" name="attendance" placeholder="Out of 10" required><br><br>
+        First: <input type="number" name="first" placeholder="Out of 100" required><br><br>
+        Second: <input type="number" name="second" placeholder="Out of 100" required><br><br>
+        Third: <input type="number" name="third" placeholder="Out of 100" required><br><br>
+        Gender:
+        <select name="gender" required>
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select><br><br>
+        <input type="submit" name="" value="Go">
+
+    </form>
+
+</body>
+</html>
