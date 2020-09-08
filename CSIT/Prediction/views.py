@@ -5,19 +5,20 @@ from django.shortcuts import render, redirect
 
 
 def predict(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         Id = request.POST['s_id']
+        print('my id: ', Id)
         assignment = request.POST['assignment']
         attendance = request.POST['attendance']
-        first = request.POST['third']
-        gender = request.POST['first']
+        first = request.POST['first']
+        gender = request.POST['gender']
         second = request.POST['second']
-        third = request.POST['gender']
+        third = request.POST['third']
 
         fields = [Id, gender, assignment, attendance, first, second, third]
 
         if not None in fields:
-            # Datapreprocessing Convert the values to float, int
+            # Data preprocessing Convert the values to float, int
             Id = int(Id)
             assignment = int(assignment)
             attendance = int(attendance)
@@ -26,20 +27,17 @@ def predict(request):
             third = float(third)
             gender = int(gender)
 
-            result = [Id, assignment, attendance, first, second, third, gender]
+        results = [Id, assignment, attendance, first, second, third, gender]
+        # path = './MLmodel/11chemistry.pkl'
+        # model = pickle.load(open(path, 'rb'))
 
-            path = './MLmodel/11chemistry.pkl'
-            model = pickle.load(open(path, 'rb'))
+        with open('./Prediction/11biology.pkl', 'rb') as file:
+            model = pickle.load(file)
 
-            final = model.predict([result])[0]
-            # print(final)
-            #
-            # PredResults.objects.create(s_id=Id, gender=gender, assignment=assignment,
-            #                            attendance=attendance, first=first, second=second,
-            #                            third=third, final=final)
+        final = model.predict([results])[0]
 
-            context = {'final': final}
-            return render(request, 'Prediction/predict.html', context)
+        context = {'final': final}
+        return render(request, 'Prediction/predict.html', context)
 
     return render(request, 'Prediction/predict.html')
 
